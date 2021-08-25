@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Chatbot HR Services</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <div class="container">
+        <h1>Talk to Abzooba chatbot!</h1><br><br>
+        <div id="userinput" class="alert alert-primary" role="alert">
+            User: {{user_input}}
+        </div>
+        <div id="botresponse" class="alert alert-dark" role="alert">
+              HR: {{bot_response}}
+        </div>
+        
+        <input type="text" name="user_input" id="user_input" class="input-small"><br><br>
+        <button onclick="sendToServer()" class="btn btn-success" id="bottn">Send</button>
+        <br><br>
+        <span></span>
+    </div>
+
+    <script>
+        function sendToServer(){
+            console.log("clicked")
+            $.ajax({
+                url: 'http://127.0.0.1:10533/api/talk',
+                data :{
+                    user_input: $("#user_input").val()
+                },
+                type: 'POST'
+                //contentType: 'application/json',
+                //headers: 'Access-Control-Allow-Origin: *'
+            }).done(function(data){
+                console.log("enter")
+                let user = $("#user_input").val()
+                document.getElementById('userinput').innerText=user,
+                document.getElementById('botresponse').innerText=data.msg
+            })
+        }
+    </script>
+    
+</body>
+</html>
+
+
