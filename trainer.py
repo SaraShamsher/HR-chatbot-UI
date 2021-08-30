@@ -20,9 +20,9 @@ def brain(user_input):
     response = chatbot.get_response(user_input)
     return response
 
-wait = True
+#wait = True
 
-while wait:
-    print(brain(input("Talk Abzooba Bot: ")))
+#while wait:
+    #print(brain(input("Talk Abzooba Bot: ")))
 
 
