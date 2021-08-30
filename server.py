@@ -1,14 +1,14 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-# import trainer
+import trainer
 app = Flask(__name__)
-CORS(app,support_credentials=True)
+CORS(app)
 
 @app.route('/api/talk',methods=['POST'])
 def index():
     user_input = request.form['user_input']
-    return jsonify({'msg':'hello'})
+    return jsonify({'msg':str(trainer.brain(user_input))})
 
 if __name__ == '__main__':
-  app.run(host='127.0.0.1', port=10533, debug=True)
+  app.run(host='127.0.0.1', port=8000, debug=True)
  
